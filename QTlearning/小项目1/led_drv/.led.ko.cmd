@@ -1,0 +1,1 @@
+cmd_/mnt/hgfs/share/led_drv/led.ko := /usr/local/arm/bin/arm-none-linux-gnueabi-ld -EL -r  -T /home/gec/Download/linux-2.6.35.7-gec/scripts/module-common.lds --build-id -o /mnt/hgfs/share/led_drv/led.ko /mnt/hgfs/share/led_drv/led.o /mnt/hgfs/share/led_drv/led.mod.o

@@ -1,0 +1,2 @@
+0x00000000	s3c_adc_get_adc_data	/mnt/hgfs/share/s5pv210/gec210-2440-double-core/210/adc/adc_drv/adc_drv	EXPORT_SYMBOL
+0x00000000	s3c_adc_get	/mnt/hgfs/share/s5pv210/gec210-2440-double-core/210/adc/adc_drv/adc_drv	EXPORT_SYMBOL

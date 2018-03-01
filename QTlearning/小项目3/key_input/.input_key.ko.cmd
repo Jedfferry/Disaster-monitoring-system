@@ -1,0 +1,1 @@
+cmd_/mnt/hgfs/share/key_input/input_key.ko := /usr/local/arm/bin/arm-none-linux-gnueabi-ld -EL -r  -T /home/gec/Download/linux-2.6.35.7-gec/scripts/module-common.lds --build-id -o /mnt/hgfs/share/key_input/input_key.ko /mnt/hgfs/share/key_input/input_key.o /mnt/hgfs/share/key_input/input_key.mod.o

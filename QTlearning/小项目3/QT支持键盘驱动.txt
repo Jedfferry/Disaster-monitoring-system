@@ -1,0 +1,11 @@
+
+添加环境变量（/etc/profile）：
+
+
+   export QT_QPA_GENERIC_PLUGINS=tslib,evdevkeyboard:/dev/event1
+
+                                        _______________________
+                                            键盘配置： /dev/eventX
+
+
+重启开发板，生效

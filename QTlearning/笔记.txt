@@ -1,0 +1,98 @@
+
+   linux 的 图形系统
+
+    
+   Linux 图形设备：   frame buffer
+
+   设备文件：         /dev/fbx
+
+   cat  /bin/busybox    >  /dev/fb0     ---->  800*480*32bit
+
+
+    Linux 输入设备：  input_dev
+
+    设备文件：         /dev/eventx
+
+    cat  /dev/event0
+
+
+  //输入设备回传的数据
+
+  struct input_event {
+	struct timeval time;
+	__u16 type;   //事件类型
+	__u16 code;   //事件的值 （按键： 键值    触摸屏： 坐标系）
+	__s32 value;  //具体的值 （按键： 按下 1  弹起 0   触摸屏： 坐标） 
+  };  
+
+
+
+   Linux系统图形开发思路
+
+   A)基于硬件的工作原理
+
+     LCD控制器操作   ---->  linux的LCD驱动
+
+   B)基于内核的框架
+
+      1.一切都是文件
+      2.使用文件IO访问（syscall）
+      3.open/close/write/read/mmap
+
+   C)封装
+     
+      1.构图    ---> 绘制坐标，RGB
+      2.交互    ---> 响应输入信号（键盘，鼠标，触摸屏....）
+      3.反馈    ---> 回调操作（绘图...,数据传递...）
+
+
+    C实现：
+
+       #include <sys/types.h>
+       #include <sys/stat.h>
+       #include <fcntl.h>
+
+       int open(const char *pathname, int flags);
+
+
+
+        #include <sys/mman.h>
+
+       void *mmap(void *addr, size_t length, int prot, int flags,
+                  int fd, off_t offset);
+
+
+
+
+
+
+       int munmap(void *addr, size_t length);
+
+  
+
+
+    C++实现：
+
+
+
+
+    QT实现：
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+     
+   
