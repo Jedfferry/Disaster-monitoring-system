@@ -1,0 +1,69 @@
+
+
+连接好开发板，重新启动，进入u-boot交叉界面，执行如下操作：
+
+# nand erase 0x600000 0x500000
+
+重新复位，你会发现不再能够启动。
+
+
+1 配置网络
+ 
+# pri
+# setenv ipaddr 192.168.xx.xx  		(注：192.168.xx.xx 即为开发板IP)
+# setenv serverip 192.168.xx.xxx	(注：192.168.xx.xxx即为主机IP)
+# setenv gatewayip 192.168.xx.1		(注：192.168.xx.1即网关)
+# saveenv
+
+# ping 192.168.xx.xxx			(如果能通，则继续往下做)
+
+2 烧写系统文件
+
+首先，启动你的tftp服务，执行如下动作：
+
+1)烧写kernel
+
+# tftp 0x40000000 uImage
+# nand erase 0x600000 0x500000
+# nand write 0x40000000 0x600000 0x500000
+
+2)烧写fs
+# tftp 0x40000000 rootfs.img  
+# nand erase 0xe00000 0xf200000
+# nand write.yaffs 0x40000000 0xe00000 0xxxxx（根据下载大小确定）
+
+3)烧写u-boot
+
+# tftp 0x40000000 u-boot.bin
+# nand erase 0x0 0x600000
+# nand write 0x40000000 0x0 0x600000
+
+
+3 重启,配置启动参数
+
+测试一：
+
+# setenv bootcmd nand read 0x40000000 0x600000 0x500000 \; bootm 0x40000000
+# saveenv
+
+
+# setenv bootcmd tftp 40000000 start.bin \;go 0x40000000 \;xxxx
+
+重启，观察效果。
+
+测试二：
+
+# setenv machid 0xf9f
+# saveenv
+
+重启，观察效果。
+
+测试三：
+# setenv bootargs root=/dev/mtdblock4 init=/sbin/init console=ttySAC0,115200 rootfstype=yaffs rw
+# saveenv
+
+bootargs : 启动参数
+
+重启，观察效果。
+
+
